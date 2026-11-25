@@ -822,9 +822,9 @@ function renderReport(){
     :`${x.ok?'<span class="o">✔</span>':'<span class="x">✖</span>'} <b>${esc(x.a)}</b> + <b>${esc(x.b)}</b> 붙여 앉히기: ${x.ok?'바로 옆/앞뒤':'떨어짐('+x.got+'칸)'}`;
   if(0)(rep.length?`<div class="msg ${bad.length?'bad':'ok'}">${bad.length?`지키지 못한 조건이 ${bad.length}개 있습니다. 다시 뽑거나 조건을 조금 낮춰 보세요.`:`모든 조건 ${rep.length}개를 지켰습니다.`}</div>`:'<div class="msg ok">설정한 조건이 없습니다.</div>')+
     [...bad,...rep.filter(x=>x.ok)].map(line).join('<br>');
-  const rl=S.result.relaxed||[];
+  const rl=[];
   $('#goMsg').innerHTML=(rl.length?`<div class="msg warn">ℹ 조건끼리 서로 부딪혀 그대로는 배치할 수 없어서, 아래 ${rl.length}쌍의 거리만 조금 줄였습니다. 나머지 조건은 모두 지켰습니다.<br>${rl.slice(0,12).map(esc).join(' · ')}${rl.length>12?' 외':''}</div>`:'')+
-    (bad.length?`<div class="msg warn">⚠ 지키지 못한 조건이 ${bad.length}개 있습니다. 다시 뽑거나 2번 탭에서 조건을 조금 낮춰 보세요.</div>`:'');
+    (0?`<div class="msg warn">⚠ 지키지 못한 조건이 ${bad.length}개 있습니다. 다시 뽑거나 2번 탭에서 조건을 조금 낮춰 보세요.</div>`:'');
 }
 $('#go').onclick=async()=>{
   if(busy)return;
